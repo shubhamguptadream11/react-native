@@ -22,6 +22,11 @@ function flattenStyle<TStyleProp: DangerouslyImpreciseStyleProp>(
   }
 
   if (!Array.isArray(style)) {
+    if (__DEV__) {
+      if (Object.isFrozen(style)) {
+        return {...style}
+      }
+    }
     // $FlowFixMe[incompatible-return]
     return style;
   }
